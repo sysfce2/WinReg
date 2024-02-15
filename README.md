@@ -1,4 +1,4 @@
-# WinReg v6.1.1
+# WinReg v6.1.1-cpp14 -- C++14 Compatible Version
 ## High-level C++ Wrapper Around the Low-level Windows Registry C-interface API
 
 by Giovanni Dicanio
@@ -30,8 +30,8 @@ The Win32 registry value types are mapped to C++ higher-level types according th
 | `REG_BINARY`         | `std::vector<BYTE>`          |
 
 
-This code is currently developed using **Visual Studio 2019** with **C++17** features enabled 
-(`/std:c++17`). I have no longer tested the code with previous compilers. 
+This code is currently developed using **Visual Studio 2019** in its default **C++14** mode
+(however, it also compiles successfully in C++17 mode).
 The code compiles cleanly at warning level 4 (`/W4`) in both 32-bit and 64-bit builds.
 
 This is a **header-only** library, implemented in the **[`WinReg.hpp`](WinReg/WinReg.hpp)** 
@@ -134,12 +134,6 @@ else
 }
 ```
 
-**Version Note** WinReg v5.1.1 is the latest version in which the `TryGetXxxValue` methods return 
-`std::optional<T>` (discarding the information about the error code).
-Starting from v6.0.0, the `TryGetXxxxValue` methods return `RegExpected<T>` (which keeps 
-the error information on failure).
-
-
 Note that many methods are available in _two forms_: one that _throws an exception_ of type 
 `RegException` on error (e.g. `RegKey::Open`), and another that _returns an error status object_ 
 of type `RegResult` (e.g. `RegKey::TryOpen`) instead of throwing an exception.
@@ -155,3 +149,13 @@ See the [**`WinReg.hpp`**](WinReg/WinReg.hpp) header for more details and **docu
 
 Thanks to everyone who contributed to this project with some additional features and constructive 
 comments and suggestions.
+
+
+### Version Notes
+
+* WinReg v5.1.1 is the latest version in which the `TryGetXxxValue` methods return 
+`std::optional<T>` (discarding the information about the error code).
+Starting from v6.0.0, the `TryGetXxxxValue` methods return `RegExpected<T>` (which keeps 
+the error information on failure).
+
+* WinReg v6.1.1 requires a C++17 compiler, while this version compiles also in C++14 mode.
